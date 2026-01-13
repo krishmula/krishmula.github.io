@@ -46,12 +46,12 @@ export default async function Home() {
       <section className="space-y-4">
         <h2 className="font-serif font-bold text-lg">Stack</h2>
         <div className="flex flex-wrap gap-x-4 gap-y-2 text-sm text-muted-foreground">
-          <span className="flex items-center gap-1.5"><SiReact className="w-3.5 h-3.5" /> React</span>
           <span className="flex items-center gap-1.5"><SiTypescript className="w-3.5 h-3.5" /> TypeScript</span>
           <span className="flex items-center gap-1.5"><SiPython className="w-3.5 h-3.5" /> Python</span>
           <span className="flex items-center gap-1.5"><SiPostgresql className="w-3.5 h-3.5" /> PostgreSQL</span>
           <span className="flex items-center gap-1.5"><SiPytorch className="w-3.5 h-3.5" /> PyTorch</span>
           <span className="flex items-center gap-1.5"><SiAmazonwebservices className="w-3.5 h-3.5" /> AWS</span>
+          <span className="flex items-center gap-1.5"><SiReact className="w-3.5 h-3.5" /> React</span>
         </div>
       </section>
 
