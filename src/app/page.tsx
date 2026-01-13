@@ -9,10 +9,17 @@ export default async function Home() {
     <div className="space-y-12 max-w-xl">
       <section className="space-y-4">
         <h1 className="font-serif font-bold text-xl">Krishna</h1>
-        <p className="text-muted-foreground leading-relaxed">
-          I'm a software engineer and digital gardener. I enjoy building scalable and distributed systems. I mostly work with Python, TypeScript, and C++. I occasionally dabble in functional programming with Lua. I'm learning cool things in Machine Learning and AI. I watch and play football, and go down the rabbit hole of history when I'm not coding.
-          Currently building <Link href="#" className="text-foreground hover:text-tertiary underline decoration-tertiary/50 underline-offset-4 transition-colors">cool things</Link>.
-        </p>
+        <div className="flex flex-col gap-4 text-muted-foreground leading-relaxed">
+          <p>
+            I'm a software engineer and a CS grad student. I enjoy building scalable and distributed systems. I mostly work with Python, TypeScript, and C++.
+          </p>
+          <p>
+            I occasionally dabble in functional programming with Lua. I'm learning cool things in Machine Learning and AI. I watch and play football, and go down the rabbit hole of history when I'm not coding.
+          </p>
+          <p>
+            Currently building <Link href="#" className="text-foreground hover:text-tertiary underline decoration-tertiary/50 underline-offset-4 transition-colors">cool things</Link>.
+          </p>
+        </div>
       </section>
 
       <section className="space-y-6">
@@ -46,8 +53,8 @@ export default async function Home() {
       <section className="space-y-4">
         <h2 className="font-serif font-bold text-lg">Stack</h2>
         <div className="flex flex-wrap gap-x-4 gap-y-2 text-sm text-muted-foreground">
-          <span className="flex items-center gap-1.5"><SiTypescript className="w-3.5 h-3.5" /> TypeScript</span>
           <span className="flex items-center gap-1.5"><SiPython className="w-3.5 h-3.5" /> Python</span>
+          <span className="flex items-center gap-1.5"><SiTypescript className="w-3.5 h-3.5" /> TypeScript</span>
           <span className="flex items-center gap-1.5"><SiPostgresql className="w-3.5 h-3.5" /> PostgreSQL</span>
           <span className="flex items-center gap-1.5"><SiPytorch className="w-3.5 h-3.5" /> PyTorch</span>
           <span className="flex items-center gap-1.5"><SiAmazonwebservices className="w-3.5 h-3.5" /> AWS</span>
