@@ -10,7 +10,7 @@ export default async function Home() {
       <section className="space-y-4">
         <h1 className="font-serif font-bold text-xl">Krishna</h1>
         <p className="text-muted-foreground leading-relaxed">
-          I'm a software engineer and digital gardener. I build distributed systems and web tools, mostly with React and Python.
+          I'm a software engineer and digital gardener. I enjoy building scalable and distributed systems. I mostly work with Python, TypeScript, and C++. I occasionally dabble in functional programming with Lua. I'm learning cool things in Machine Learning and AI. I watch and play football, and go down the rabbit hole of history when I'm not coding.
           Currently building <Link href="#" className="text-foreground hover:text-tertiary underline decoration-tertiary/50 underline-offset-4 transition-colors">cool things</Link>.
         </p>
       </section>
