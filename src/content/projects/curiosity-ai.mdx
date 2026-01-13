@@ -1,0 +1,60 @@
+---
+title: "Curiosity AI"
+date: "2025-10-27"
+description: "Research gap discovery system using Gaussian Mixture Model density estimation on paper embeddings to identify unexplored invention opportunities, with autonomous agents generating feasibility analyses and research proposals."
+tech: ["Python", "LangChain", "ChromaDB", "Next.js"]
+---
+
+<div className="flex flex-wrap items-center gap-3 not-prose mb-6">
+  <a href="https://github.com/krishmula/curiosity-ai" target="_blank" className="inline-flex items-center gap-2 px-3 py-1.5 text-sm rounded-md bg-highlight border border-muted text-foreground hover:border-foreground/30 transition-colors no-underline">
+    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+    GitHub
+  </a>
+  <span className="inline-flex items-center gap-2 px-3 py-1.5 text-sm rounded-md border border-dashed border-muted/50 text-muted-foreground/50 cursor-not-allowed">
+    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+    Live Demo Coming Soon
+  </span>
+</div>
+
+CuriosityAI identifies unexplored research areas by analyzing density distributions in embedding space. The system fetches papers from ArXiv and PubChem APIs, transforms them into high-dimensional embeddings, then applies GMM or KDE to detect low-density regions representing conceptual gaps. Autonomous agents evaluate these gaps for feasibility and generate structured research proposals with GitHub-hosted prototype code.
+
+## Gaussian Mixture Model Gap Detection
+
+The core algorithm models the distribution of existing research papers using scikit-learn's GMM in embedding space. Low-probability density regions indicate areas with minimal prior work, representing potential invention opportunities. The system ranks gaps by computing probability scores at sampled coordinates throughout the embedding manifold, filtering noise using configurable density thresholds. Vec2Text from Hugging Face performs embedding inversion to generate natural language descriptions of the unexplored concepts represented by low-density coordinates.
+
+## Technical Features
+
+- **Multi-Agent Orchestration** — FetchAI and LangChain agents coordinate parallel workflows for gap analysis, with specialized agents handling feasibility evaluation, proposal drafting, and code generation tasks independently.
+
+- **RAG Pipeline** — ChromaDB vector store enables semantic search across research papers and patents, retrieving relevant context that agents inject into Claude or Groq LLM prompts for grounded proposal generation.
+
+- **Embedding Inversion** — Vec2Text transformer architecture reconstructs text from embedding vectors, translating numerical gap coordinates into coherent research problem statements without requiring reverse lookup in the corpus.
+
+- **Voice Interface** — Deepgram speech-to-text integration enables researchers to verbally query the system and receive spoken summaries of discovered gaps and generated proposals.
+
+- **3D Visualization** — Three.js renders interactive embedding space visualizations in the Next.js frontend, displaying papers as points and highlighting low-density gap regions with color-coded probability contours.
+
+- **Automated GitHub Integration** — Agents generate prototype implementations based on proposals and use GitHub API to create repositories, commit code with structured messages, and initialize README documentation.
+
+## Architecture
+
+The Python backend implements a pipeline architecture where ingestion modules fetch papers via ArXiv and PubChem APIs, batch-process them through Hugging Face sentence transformers, and store vectors in ChromaDB with metadata indexing. The gap detection module runs periodic GMM fitting on the embedding corpus and samples the probability density function to identify candidate low-density regions. FetchAI agents operate as independent workers that query ChromaDB for context, invoke LLMs for analysis and proposal generation, then interface with GitHub API for code deployment. The Next.js frontend connects via REST endpoints to retrieve gap analysis results and streams them to Three.js for real-time visualization.
+
+## Tech Stack
+
+<div className="flex flex-wrap gap-2 not-prose">
+  <span className="px-3 py-1 text-sm rounded-full bg-highlight text-foreground border border-muted">Python</span>
+  <span className="px-3 py-1 text-sm rounded-full bg-highlight text-foreground border border-muted">FetchAI</span>
+  <span className="px-3 py-1 text-sm rounded-full bg-highlight text-foreground border border-muted">LangChain</span>
+  <span className="px-3 py-1 text-sm rounded-full bg-highlight text-foreground border border-muted">Hugging Face</span>
+  <span className="px-3 py-1 text-sm rounded-full bg-highlight text-foreground border border-muted">Vec2Text</span>
+  <span className="px-3 py-1 text-sm rounded-full bg-highlight text-foreground border border-muted">ChromaDB</span>
+  <span className="px-3 py-1 text-sm rounded-full bg-highlight text-foreground border border-muted">scikit-learn</span>
+  <span className="px-3 py-1 text-sm rounded-full bg-highlight text-foreground border border-muted">Deepgram</span>
+  <span className="px-3 py-1 text-sm rounded-full bg-highlight text-foreground border border-muted">Next.js</span>
+  <span className="px-3 py-1 text-sm rounded-full bg-highlight text-foreground border border-muted">Three.js</span>
+</div>
+
+{/* ## What I Built
+
+[YOUR SPECIFIC CONTRIBUTIONS HERE] */}
