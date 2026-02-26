@@ -64,7 +64,7 @@ export default async function Home() {
 
       <section className="space-y-6">
         <h2 className="font-serif font-bold text-lg">Connect</h2>
-        <div className="flex gap-4 text-sm text-muted-foreground">
+        <div className="flex flex-wrap gap-4 text-sm text-muted-foreground">
           <a href="https://github.com/krishmula" target="_blank" className="hover:text-foreground transition-colors flex items-center gap-1">
             <ArrowUpRight className="w-3 h-3" /> GitHub
           </a>
@@ -74,6 +74,9 @@ export default async function Home() {
           <a href="https://linkedin.com/in/krishna-mula" target="_blank" className="hover:text-foreground transition-colors flex items-center gap-1">
             <ArrowUpRight className="w-3 h-3" /> LinkedIn
           </a>
+          <Link href="/resume" className="hover:text-foreground transition-colors flex items-center gap-1">
+            <ArrowUpRight className="w-3 h-3" /> Resume
+          </Link>
         </div>
       </section>
     </div>

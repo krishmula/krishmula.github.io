@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Search, Home, BookOpen, Folder, Github, Twitter, Linkedin } from 'lucide-react';
+import { Search, Home, BookOpen, Folder, Github, Twitter, Linkedin, FileText } from 'lucide-react';
 import { ThemeToggle } from "./theme-toggle";
 
 export function Sidebar() {
@@ -41,6 +41,13 @@ export function Sidebar() {
                     <SocialLink href="https://github.com/krishmula" icon={Github} label="GitHub" />
                     <SocialLink href="https://x.com/krxnaaa" icon={Twitter} label="X (Twitter)" />
                     <SocialLink href="https://linkedin.com/in/krishna-mula" icon={Linkedin} label="LinkedIn" />
+                    <Link
+                        href="/resume"
+                        className="flex items-center gap-2 text-sm text-muted-foreground hover:text-tertiary transition-colors"
+                    >
+                        <FileText className="w-4 h-4" />
+                        <span>Resume</span>
+                    </Link>
                 </nav>
             </div>
         </div>
