@@ -11,13 +11,13 @@ export default async function Home() {
         <h1 className="font-serif font-bold text-xl">Krishna</h1>
         <div className="flex flex-col gap-4 text-muted-foreground leading-relaxed">
           <p>
-            I'm a software engineer and a CS grad student. I enjoy building scalable and distributed systems. I mostly work with Python, TypeScript, and C++.
+            I'm a software engineer and a CS grad student. I enjoy building scalable and distributed systems. I mostly work with Python, TypeScript, and PostgreSQL.
           </p>
           <p>
             I occasionally dabble in functional programming with Lua. I'm learning cool things in Machine Learning and AI. I watch and play football, and go down the rabbit hole of history when I'm not coding.
           </p>
           <p>
-            Currently building <Link href="#" className="text-foreground hover:text-tertiary underline decoration-tertiary/50 underline-offset-4 transition-colors">cool things</Link>.
+            Currently building <Link href="https://github.com/krishmula/aether" className="text-foreground hover:text-tertiary underline decoration-tertiary/50 underline-offset-4 transition-colors">Aether</Link>.
           </p>
         </div>
       </section>
@@ -25,15 +25,10 @@ export default async function Home() {
       <section className="space-y-6">
         <h2 className="font-serif font-bold text-lg">Projects</h2>
         <div className="flex flex-col gap-4">
-          <ProjectItem
-            title="sero"
-            description="Bill splitting with OCR and distributed claiming."
-            href="https://github.com/krishmula/sero"
-          />
-          <ProjectItem
-            title="pub-sub"
+<ProjectItem
+            title="Aether"
             description="Distributed pub-sub with gossip and snapshots."
-            href="https://github.com/krishmula/pub-sub"
+            href="https://github.com/krishmula/aether"
           />
           <ProjectItem
             title="denoising-autoencoders"
