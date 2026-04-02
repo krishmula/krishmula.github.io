@@ -1,0 +1,58 @@
+---
+title: "Playlixt"
+date: "2025-08-25"
+description: "Cross-platform playlist converter that migrates music collections between Spotify, YouTube Music, and Apple Music using parallel track search and fuzzy metadata matching."
+tech: ["Next.js", "TypeScript", "Zustand", "Radix UI"]
+---
+
+<div className="flex flex-wrap items-center gap-3 not-prose mb-6">
+  <a href="https://github.com/krishmula/playlixt" target="_blank" className="inline-flex items-center gap-2 px-3 py-1.5 text-sm rounded-md bg-highlight border border-muted text-foreground hover:border-foreground/30 transition-colors no-underline">
+    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+    GitHub
+  </a>
+  <span className="inline-flex items-center gap-2 px-3 py-1.5 text-sm rounded-md border border-dashed border-muted/50 text-muted-foreground/50 cursor-not-allowed">
+    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+    Live Demo Coming Soon
+  </span>
+</div>
+
+Playlixt converts playlists bidirectionally across Spotify, YouTube Music, and Apple Music. The system extracts track metadata from the source platform, creates an identical playlist structure on the destination, and performs intelligent track matching to preserve the user's music collection across streaming services. The converter handles platform-specific track identifiers and metadata schemas through a unified transformation pipeline.
+
+## Track Matching Pipeline
+
+The conversion process operates through a multi-stage pipeline that handles authentication, metadata extraction, and cross-platform track resolution. First, the system authenticates with both source and destination platforms using OAuth 2.0 flows. It then extracts the complete track list with metadata including artist names, track titles, album information, and durations from the source playlist. For each track, the converter queries the destination platform's search API with weighted parameters, comparing results against the original metadata to find the best match before adding it to the newly created playlist.
+
+## Technical Features
+
+- **Next.js API Routes** — Server-side conversion endpoint handles OAuth token management and coordinates API calls to streaming platforms without exposing credentials to the client.
+
+- **Sequential Track Processing** — Iterates through source tracks individually, searching destination platform APIs and handling rate limits through controlled request pacing.
+
+- **Metadata Normalization** — Transforms platform-specific track data into a standardized format to enable consistent matching across Spotify's track objects, YouTube Music's videoId system, and Apple Music's storefront-specific identifiers.
+
+- **State Management with Zustand** — Client-side store tracks conversion progress, handles loading states, and manages playlist data across the application without prop drilling.
+
+- **Responsive UI with Radix Primitives** — Dialog components for authentication flows, dropdown menus for platform selection, and tooltip feedback built on accessible, unstyled component primitives styled with Tailwind CSS.
+
+- **Axios Request Interceptors** — Centralized HTTP client configuration manages authentication headers, implements retry logic for failed requests, and handles token refresh flows across all platform APIs.
+
+## Architecture
+
+The application follows a client-server split where the Next.js frontend handles user interactions and displays conversion progress while API routes manage platform authentication and orchestrate the conversion workflow. When a user initiates a conversion, the client sends the source platform, destination platform, and playlist URL to the `/convert` API endpoint. The server extracts the playlist name and complete track listing from the source API, creates a new playlist with matching metadata on the destination platform, then sequentially searches for and adds each track to the destination playlist before returning the new playlist URL to the client.
+
+## Tech Stack
+
+<div className="flex flex-wrap gap-2 not-prose">
+  <span className="px-3 py-1 text-sm rounded-full bg-highlight text-foreground border border-muted">Next.js 15</span>
+  <span className="px-3 py-1 text-sm rounded-full bg-highlight text-foreground border border-muted">TypeScript</span>
+  <span className="px-3 py-1 text-sm rounded-full bg-highlight text-foreground border border-muted">React 19</span>
+  <span className="px-3 py-1 text-sm rounded-full bg-highlight text-foreground border border-muted">Axios</span>
+  <span className="px-3 py-1 text-sm rounded-full bg-highlight text-foreground border border-muted">Zustand</span>
+  <span className="px-3 py-1 text-sm rounded-full bg-highlight text-foreground border border-muted">Radix UI</span>
+  <span className="px-3 py-1 text-sm rounded-full bg-highlight text-foreground border border-muted">Tailwind CSS</span>
+  <span className="px-3 py-1 text-sm rounded-full bg-highlight text-foreground border border-muted">Framer Motion</span>
+</div>
+
+## What I Built
+
+I implemented the core conversion logic that extracts playlist metadata from source APIs, creates destination playlists, and maps tracks across platforms by querying search endpoints with artist and title combinations. I built the Next.js API route structure that handles OAuth flows for Spotify, YouTube Music, and Apple Music while managing token storage and refresh cycles. The frontend conversion interface uses Zustand for state management, Radix UI components for platform selection and authentication dialogs, and Framer Motion for progress animations during the track-by-track conversion process.
