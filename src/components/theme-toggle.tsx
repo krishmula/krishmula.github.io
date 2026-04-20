@@ -16,15 +16,19 @@ export function ThemeToggle() {
         return <div className="w-5 h-5" /> // Placeholder to prevent layout shift
     }
 
+    const isSunny = theme !== 'dark'
+
     return (
         <button
-            onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+            onClick={() => setTheme(isSunny ? 'dark' : 'light')}
             className="relative w-5 h-5 focus:outline-none group"
-            aria-label="Toggle Theme"
+            aria-label={isSunny ? 'Switch to evening mode' : 'Switch to sunny mode'}
         >
+            {/* Sun — visible in sunny (light) mode */}
             <Sun className="absolute top-0 h-[1.2rem] w-[1.2rem] scale-100 transition-all dark:scale-0 text-foreground group-hover:text-tertiary" />
+            {/* Moon — visible in evening (dark) mode */}
             <Moon className="absolute top-0 h-[1.2rem] w-[1.2rem] scale-0 transition-all dark:scale-100 text-foreground group-hover:text-tertiary" />
-            <span className="sr-only">Toggle theme</span>
+            <span className="sr-only">{isSunny ? 'Switch to evening mode' : 'Switch to sunny mode'}</span>
         </button>
     )
 }

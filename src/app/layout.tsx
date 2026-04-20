@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
+import { Analytics } from "@vercel/analytics/react";
 import { Inter, Libre_Baskerville } from "next/font/google";
 import { Sidebar } from "@/components/sidebar";
 import { ThemeProvider } from "@/components/theme-provider";
+import { SunnyOverlay } from "@/components/sunny-overlay";
 import "./globals.css";
 
 const inter = Inter({
@@ -35,6 +37,7 @@ export default function RootLayout({
           defaultTheme="system"
           enableSystem
         >
+          <SunnyOverlay />
           <div className="relative z-10 flex flex-col md:flex-row min-h-screen max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 gap-12">
             <aside className="w-full md:w-64 flex-shrink-0">
               <Sidebar />
@@ -44,6 +47,7 @@ export default function RootLayout({
             </main>
           </div>
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   );
