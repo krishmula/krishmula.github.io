@@ -61,6 +61,9 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 export async function generateStaticParams() {
     const projects = await getAllPosts('projects');
+    if (projects.length === 0) {
+        return [{ slug: 'empty' }];
+    }
     return projects.map((project) => ({
         slug: project.slug,
     }));
