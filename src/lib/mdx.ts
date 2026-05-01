@@ -17,7 +17,7 @@ export type Post = {
 };
 
 // Define valid content types
-type ContentType = 'notes' | 'projects';
+type ContentType = 'notes' | 'projects' | 'blogs';
 
 export async function getPostBySlug(slug: string, type: ContentType = 'notes'): Promise<Post | undefined> {
     // Content is now in subdirectories: src/content/notes or src/content/projects

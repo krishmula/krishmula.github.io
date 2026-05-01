@@ -32,6 +32,7 @@ export function Sidebar() {
             <nav className="flex flex-col gap-1">
                 <NavLink href="/" icon={Home} label="Home" />
                 {/* <NavLink href="/notes" icon={BookOpen} label="Garden Notes" /> */}
+                <NavLink href="/blogs" icon={BookOpen} label="Blogs" />
                 <NavLink href="/projects" icon={Folder} label="Projects" />
             </nav>
 

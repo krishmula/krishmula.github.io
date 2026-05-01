@@ -89,3 +89,18 @@ export default async function ProjectsPage() {
         </div>
     );
 }
+                        </div >
+                    </section >
+                ));
+            }) ()}
+
+{
+    projects.length === 0 && (
+        <div className="p-8 text-center border border-dashed border-muted rounded-lg text-muted-foreground">
+            <p>No projects yet. Check back soon!</p>
+        </div>
+    )
+}
+        </div >
+    );
+}
