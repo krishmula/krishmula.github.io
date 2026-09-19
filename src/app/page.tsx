@@ -27,8 +27,15 @@ export default function Home() {
           </p>
           <p>
             Right now I&apos;m a software engineering intern at{" "}
-            <span className="text-foreground">Intake AI</span> in San Francisco,
-            working on retrieval and reranking. Before grad
+            <a
+              href="https://useintake.ai"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-foreground hover:text-tertiary underline decoration-tertiary/50 underline-offset-4 transition-colors"
+            >
+              Intake AI
+            </a>{" "}
+            in San Francisco, working on retrieval and reranking. Before grad
             school I spent three years at PwC building compliance automation and
             RAG pipelines.
           </p>
