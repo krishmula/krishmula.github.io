@@ -54,16 +54,19 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     }
 
     return {
-        title: `${project.meta.title} | Projects`,
+        title: project.meta.title,
         description: project.meta.description,
+        openGraph: {
+            title: project.meta.title,
+            description: project.meta.description,
+            type: 'article',
+            url: `/projects/${slug}`,
+        },
     };
 }
 
 export async function generateStaticParams() {
     const projects = await getAllPosts('projects');
-    if (projects.length === 0) {
-        return [{ slug: 'empty' }];
-    }
     return projects.map((project) => ({
         slug: project.slug,
     }));
