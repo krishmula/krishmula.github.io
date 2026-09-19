@@ -7,6 +7,9 @@ export function SunnyOverlay() {
     const { resolvedTheme } = useTheme()
     const [mounted, setMounted] = useState(false)
 
+    // Mount guard for next-themes: the server cannot know the resolved theme, so
+    // this deliberately renders nothing until hydration. Runs once, no cascade.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     useEffect(() => { setMounted(true) }, [])
 
     if (!mounted) return null

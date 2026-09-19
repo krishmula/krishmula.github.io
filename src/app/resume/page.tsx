@@ -1,5 +1,10 @@
 import { Download, ExternalLink } from 'lucide-react';
 
+export const metadata = {
+  title: 'Resume',
+  description: 'Resume of Krishna Mula, software engineer and CS grad student.',
+};
+
 export default function ResumePage() {
   return (
     <div className="space-y-6">

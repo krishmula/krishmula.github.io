@@ -4,7 +4,7 @@ import { format } from 'date-fns';
 import { ArrowUpRight } from 'lucide-react';
 
 export const metadata = {
-    title: 'Projects | Portfolio',
+    title: 'Projects',
     description: 'A showcase of my work and experiments.',
 };
 

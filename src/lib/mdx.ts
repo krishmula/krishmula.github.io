@@ -1,19 +1,22 @@
 import fs from 'fs';
 import path from 'path';
+import type { ReactElement } from 'react';
 import matter from 'gray-matter';
 import { compileMDX } from 'next-mdx-remote/rsc';
 
 const contentDir = path.join(process.cwd(), 'src/content');
 
+export type PostMeta = {
+    title: string;
+    date: string;
+    description?: string;
+    tech?: string[];
+};
+
 export type Post = {
     slug: string;
-    meta: {
-        title: string;
-        date: string;
-        description?: string;
-        [key: string]: any;
-    };
-    content: any; // ReactElement
+    meta: PostMeta;
+    content: ReactElement;
 };
 
 // Define valid content types
@@ -35,7 +38,7 @@ export async function getPostBySlug(slug: string, type: ContentType = 'notes'): 
 
     return {
         slug,
-        meta: frontmatter as Post['meta'],
+        meta: frontmatter as PostMeta,
         content,
     };
 }

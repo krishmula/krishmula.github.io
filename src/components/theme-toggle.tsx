@@ -8,7 +8,9 @@ export function ThemeToggle() {
     const { setTheme, theme } = useTheme()
     const [mounted, setMounted] = React.useState(false)
 
+    // Mount guard for next-themes: see sunny-overlay.tsx. Runs once, no cascade.
     React.useEffect(() => {
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setMounted(true)
     }, [])
 

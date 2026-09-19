@@ -1,0 +1,71 @@
+---
+title: "FightFlow"
+date: "2026-05-15"
+description: "Boxing punch classification from video across five progressively complex architectures. A skeleton-based Pose-LSTM beats a fine-tuned ResNet-18 because pose coordinates ignore the background that pixel models memorize."
+tech: ["PyTorch", "MediaPipe", "OpenCV", "Python"]
+---
+
+<div className="flex flex-wrap items-center gap-3 not-prose mb-6">
+  <a href="https://github.com/krishmula/fightflow" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-3 py-1.5 text-sm rounded-md bg-highlight border border-muted text-foreground hover:border-foreground/30 transition-colors no-underline">
+    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+    GitHub
+  </a>
+</div>
+
+FightFlow classifies boxing punches (straight, hook, uppercut, none) from video, built as a course project at San Jose State University. Five architectures of increasing complexity train on the same data so the comparison actually means something.
+
+The short answer: pose features beat pixels. A skeleton-based LSTM reaches macro-F1 0.682 while a fine-tuned ResNet-18 stops at 0.570, because pose coordinates stay invariant to background, lighting, and camera angle, which are exactly the things a pixel model memorizes on a 20-video dataset instead of learning punches.
+
+## Results
+
+| Model | Best Epoch | Test Acc | Macro-F1 |
+|---|---|---|---|
+| Baseline CNN (scratch) | 2 | 0.456 | 0.402 |
+| Advanced CNN (residual + attention) | 6 | 0.370 | 0.341 |
+| ResNet-18 (ImageNet fine-tune) | 7 | 0.578 | 0.570 |
+| CNN+LSTM (ResNet-18 backbone) | 7 | 0.593 | 0.588 |
+| **Pose-LSTM (MediaPipe skeleton)** | **31** | **0.692** | **0.682** |
+
+Every number sits on a video-level leakage-free test split of 695 samples. The same models on a naive clip-level split scored as high as 0.933, a reminder that data leakage is silent and flattering.
+
+## Reading the Failures
+
+Three results are worth more than the leaderboard:
+
+- **The Advanced CNN is worse than the Baseline.** More capacity without pretrained weights on 20 videos means the optimizer memorizes training clips rather than building a useful feature hierarchy. That gap is the argument for transfer learning, stated in numbers.
+- **CNN+LSTM peaks at the same epoch as ResNet-18.** Both share a ResNet-18 backbone on a 5-epoch freeze schedule, and epoch 7 is the first epoch after unfreeze. The 0.588 against 0.570 margin may come from the backbone getting extra gradient signal through the LSTM loss rather than from real temporal modeling. A frozen-backbone ablation would settle it.
+- **Hook is the hardest class** at F1 0.453. A straight punch opens the elbow from roughly 90 to 180 degrees; a hook holds it near 90 throughout while the arm sweeps laterally as a rigid unit. The feature set carries static elbow angles but not elbow angle velocity, and that two-dimensional delta is the direct discriminator.
+
+## Dataset
+
+20 videos yield 3,320 clips across 4 classes, perfectly balanced at 830 samples per class, labeled with a custom frame-level punch annotator. A Group-Aware Stratified Greedy Split partitions at the video level to keep frames from one video out of both halves, producing 2,625 train and 695 test samples in two modalities: RGB frames for the CNN models and 11-frame pose sequences for the Pose-LSTM.
+
+## Pose Feature Vector
+
+The Pose-LSTM runs on 236 engineered dimensions per frame rather than raw landmarks:
+
+| Feature group | Dims | What it captures |
+|---|---|---|
+| Normalized joint coordinates | 99 | Body pose, hip-centered and scale-normalized |
+| Inter-frame velocities | 99 | Joint motion between consecutive frames |
+| Relative wrist offsets | 18 | Wrist to shoulder, hip, and nose |
+| Peak wrist velocities | 6 | Max x/y/z speed per wrist over the clip |
+| Elbow joint angles | 2 | 3D angle at each elbow via law of cosines |
+| Wrist-to-nose velocities | 6 | Wrist closing speed toward the face |
+| Wrist extension features | 6 | Average velocity in the final 4 frames of extension |
+
+The 11-frame window holds 6 pre-peak frames, the peak, and 4 after. Clip lengths of 8, 10, 11, and 12 were all evaluated; 11 gave the best test F1 and covers the punch arc from wind-up through follow-through.
+
+## Tech Stack
+
+<div className="flex flex-wrap gap-2 not-prose">
+  <span className="px-3 py-1 text-sm rounded-full bg-highlight text-foreground border border-muted">Python 3.10+</span>
+  <span className="px-3 py-1 text-sm rounded-full bg-highlight text-foreground border border-muted">PyTorch</span>
+  <span className="px-3 py-1 text-sm rounded-full bg-highlight text-foreground border border-muted">MediaPipe</span>
+  <span className="px-3 py-1 text-sm rounded-full bg-highlight text-foreground border border-muted">OpenCV</span>
+  <span className="px-3 py-1 text-sm rounded-full bg-highlight text-foreground border border-muted">ffmpeg</span>
+</div>
+
+## What I Built
+
+Annotated the dataset frame by frame, wrote the group-aware split that keeps the evaluation honest, engineered the 236-dimensional pose feature vector, and implemented all five models behind a single CLI entry point so every architecture trains and evaluates through the same pipeline.

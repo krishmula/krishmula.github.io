@@ -4,39 +4,54 @@ import {
   SiReact,
   SiTypescript,
   SiPython,
+  SiFastapi,
   SiPostgresql,
   SiPytorch,
-  SiAmazonwebservices,
+  SiDocker,
+  SiTerraform,
 } from "react-icons/si";
-import { getAllPosts } from "@/lib/mdx";
+import { FaAws } from "react-icons/fa6";
 
-export default async function Home() {
-  const posts = await getAllPosts("notes");
+export default function Home() {
   return (
     <div className="space-y-12 max-w-xl">
       <section className="space-y-4">
         <h1 className="font-serif font-bold text-xl">Krishna</h1>
         <div className="flex flex-col gap-4 text-muted-foreground leading-relaxed">
           <p>
-            I'm a software engineer and a CS grad student. I enjoy building
-            scalable and distributed systems. I mostly work with Python,
-            TypeScript, and PostgreSQL.
+            I&apos;m a software engineer and a CS grad student at San Jose State. I
+            like systems that have to keep working when something fails, which
+            lately means GPU inference services, event-driven AWS, and the
+            occasional distributed protocol. I mostly write Python and
+            TypeScript.
           </p>
           <p>
-            I occasionally dabble in functional programming with Lua. I'm
-            learning cool things in Machine Learning and AI. I watch and play
-            football, and go down the rabbit hole of history when I'm not
-            coding.
-          </p>
-          <p>
-            Currently building{" "}
-            <Link
-              href="https://github.com/krishmula/aether"
+            Right now I&apos;m a software engineering intern at{" "}
+            <a
+              href="https://useintake.ai"
+              target="_blank"
+              rel="noopener noreferrer"
               className="text-foreground hover:text-tertiary underline decoration-tertiary/50 underline-offset-4 transition-colors"
             >
-              Aether
-            </Link>
-            .
+              Intake AI
+            </a>{" "}
+            in San Francisco, working on retrieval and reranking. Before grad
+            school I spent three years at PwC building compliance automation and
+            RAG pipelines.
+          </p>
+          <p>
+            Outside work I&apos;m writing neural nets by hand to understand them
+            properly, and building{" "}
+            <a
+              href="https://github.com/krishmula/janus"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-foreground hover:text-tertiary underline decoration-tertiary/50 underline-offset-4 transition-colors"
+            >
+              Janus
+            </a>
+            . I watch and play football, and go down the rabbit hole of history
+            when I&apos;m not coding.
           </p>
         </div>
       </section>
@@ -45,27 +60,20 @@ export default async function Home() {
         <h2 className="font-serif font-bold text-lg">Projects</h2>
         <div className="flex flex-col gap-4">
           <ProjectItem
+            slug="aether"
             title="Aether"
-            description="Distributed pub-sub with gossip and snapshots."
-            href="https://github.com/krishmula/aether"
+            description="Distributed pub-sub over raw TCP. Gossip mesh, Chandy-Lamport snapshots, hybrid failover."
           />
           <ProjectItem
-            title="denoising-autoencoders"
-            description="CNN autoencoder for image noise removal."
-            href="https://github.com/krishmula/denoising-autoencoders"
+            slug="fightflow"
+            title="FightFlow"
+            description="Boxing punch classification from video. Pose features beat pixels on a small dataset."
           />
-          <Link
-            href="/projects/sero"
-            className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4 group"
-          >
-            <span className="font-medium text-foreground underline decoration-muted/50 underline-offset-4 group-hover:decoration-tertiary transition-all">
-              Sero
-            </span>
-            <span className="text-muted-foreground text-sm">
-              Bill splitting via OCR. Roommates claim their own items from a
-              receipt photo.
-            </span>
-          </Link>
+          <ProjectItem
+            slug="phantom"
+            title="Phantom"
+            description="CloudFormation drift analysis that decides whether to legitimize, revert, or refactor."
+          />
           <Link
             href="/projects"
             className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors group mt-2"
@@ -86,13 +94,22 @@ export default async function Home() {
             <SiTypescript className="w-3.5 h-3.5" /> TypeScript
           </span>
           <span className="flex items-center gap-1.5">
+            <SiFastapi className="w-3.5 h-3.5" /> FastAPI
+          </span>
+          <span className="flex items-center gap-1.5">
             <SiPostgresql className="w-3.5 h-3.5" /> PostgreSQL
           </span>
           <span className="flex items-center gap-1.5">
             <SiPytorch className="w-3.5 h-3.5" /> PyTorch
           </span>
           <span className="flex items-center gap-1.5">
-            <SiAmazonwebservices className="w-3.5 h-3.5" /> AWS
+            <FaAws className="w-3.5 h-3.5" /> AWS
+          </span>
+          <span className="flex items-center gap-1.5">
+            <SiDocker className="w-3.5 h-3.5" /> Docker
+          </span>
+          <span className="flex items-center gap-1.5">
+            <SiTerraform className="w-3.5 h-3.5" /> Terraform
           </span>
           <span className="flex items-center gap-1.5">
             <SiReact className="w-3.5 h-3.5" /> React
@@ -106,6 +123,7 @@ export default async function Home() {
           <a
             href="https://github.com/krishmula"
             target="_blank"
+            rel="noopener noreferrer"
             className="hover:text-foreground transition-colors flex items-center gap-1"
           >
             <ArrowUpRight className="w-3 h-3" /> GitHub
@@ -113,6 +131,7 @@ export default async function Home() {
           <a
             href="https://x.com/krxnaaa"
             target="_blank"
+            rel="noopener noreferrer"
             className="hover:text-foreground transition-colors flex items-center gap-1"
           >
             <ArrowUpRight className="w-3 h-3" /> X (Twitter)
@@ -120,6 +139,7 @@ export default async function Home() {
           <a
             href="https://linkedin.com/in/krishna-mula"
             target="_blank"
+            rel="noopener noreferrer"
             className="hover:text-foreground transition-colors flex items-center gap-1"
           >
             <ArrowUpRight className="w-3 h-3" /> LinkedIn
@@ -137,24 +157,23 @@ export default async function Home() {
 }
 
 function ProjectItem({
+  slug,
   title,
   description,
-  href,
 }: {
+  slug: string;
   title: string;
   description: string;
-  href: string;
 }) {
   return (
-    <a
-      href={href}
-      target="_blank"
+    <Link
+      href={`/projects/${slug}`}
       className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4 group"
     >
-      <span className="font-medium text-foreground underline decoration-muted/50 underline-offset-4 group-hover:decoration-tertiary transition-all">
+      <span className="font-medium text-foreground underline decoration-muted/50 underline-offset-4 group-hover:decoration-tertiary transition-all whitespace-nowrap">
         {title}
       </span>
       <span className="text-muted-foreground text-sm">{description}</span>
-    </a>
+    </Link>
   );
 }
