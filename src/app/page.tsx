@@ -40,18 +40,21 @@ export default function Home() {
             RAG pipelines.
           </p>
           <p>
-            Outside work I&apos;m writing neural nets by hand to understand them
-            properly, and building{" "}
+            I&apos;m working toward inference engineering: what it costs to
+            serve a model, where the latency actually goes, and how to get more
+            out of a GPU than the default configuration gives you. Alongside
+            that I&apos;m{" "}
             <a
-              href="https://github.com/krishmula/janus"
+              href="https://github.com/krishmula/nn-z2h"
               target="_blank"
               rel="noopener noreferrer"
               className="text-foreground hover:text-tertiary underline decoration-tertiary/50 underline-offset-4 transition-colors"
             >
-              Janus
+              writing neural nets by hand
             </a>
-            . I watch and play football, and go down the rabbit hole of history
-            when I&apos;m not coding.
+            , no AI assistance, to understand the layer underneath. I watch and
+            play football, and go down the rabbit hole of history when
+            I&apos;m not coding.
           </p>
         </div>
       </section>
