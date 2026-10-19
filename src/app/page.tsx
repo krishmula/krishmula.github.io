@@ -35,7 +35,8 @@ export default function Home() {
             >
               Intake AI
             </a>{" "}
-            in San Francisco, working on retrieval and reranking. Before grad
+            in San Francisco, working on retrieval and reranking for the chat
+            assistant clinical trial sites use to query their documents. Before grad
             school I spent three years at PwC building compliance automation and
             RAG pipelines.
           </p>
