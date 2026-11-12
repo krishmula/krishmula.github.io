@@ -5,7 +5,7 @@ import { ArrowUpRight } from 'lucide-react';
 
 export const metadata = {
     title: 'Projects',
-    description: 'A showcase of my work and experiments.',
+    description: 'Exploring inference engineering/systems and kernels.',
 };
 
 export default async function ProjectsPage() {
@@ -16,7 +16,7 @@ export default async function ProjectsPage() {
             <header>
                 <h1 className="text-3xl font-serif font-bold mb-4">Projects</h1>
                 <p className="text-muted-foreground">
-                    A showcase of my work and experiments.
+                    Exploring inference engineering/systems and kernels.
                 </p>
             </header>
 
